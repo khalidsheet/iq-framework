@@ -1,0 +1,25 @@
+{
+    "name": "prog98rammer/iq-framework",
+    "description": "A web framework",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Khalid M. Sheet",
+            "email": "prog.khalid.mohammad@gmail.com"
+        }
+    ],
+    "require": {
+        "pecee/simple-router": "^3.7",
+        "filp/whoops": "^2.1",
+        "illuminate/database": "^5.6",
+        "rakit/validation": "^0.14.0",
+        "bshaffer/oauth2-server-php": "^1.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "Controllers\\": "app/controllers/",
+            "Models\\": "app/models/" 
+        }
+    }
+}
