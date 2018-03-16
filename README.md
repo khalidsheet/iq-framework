@@ -33,7 +33,7 @@ Router::get('home', function() {
 
 Route with parameters
 ```php
-Route::get('hello/{name}', function($name) {
+Router::get('hello/{name}', function($name) {
     return 'Hello' . $name;
 });
 ```
