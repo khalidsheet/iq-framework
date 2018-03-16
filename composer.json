@@ -16,7 +16,7 @@
         "rakit/validation": "^0.14.0",
         "bshaffer/oauth2-server-php": "^1.10"
     },
-    "minimam-stability": "stable",
+    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
             "Controllers\\": "app/controllers/",
