@@ -11,4 +11,9 @@ class AuthController
 	{
 		return 'login';
 	}
+
+	public function register()
+	{
+		return 'register';
+	}
 }
