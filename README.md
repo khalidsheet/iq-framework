@@ -33,7 +33,27 @@ Router::get('home', function() {
 
 Route with parameters
 ```php
-Router::get('hello/{name}', function($name) {
+Route::get('hello/{name}', function($name) {
     return 'Hello' . $name;
 });
 ```
+
+Route with Controller
+in `routes/web.php`
+```php
+Router::post('login', 'AuthController@login');
+Router::get('user/{username}/profile', 'AuthController@showProfile'); // http://fake.com/login/testuser/profile
+```
+in `app/controllers/AuthController.php`
+```php
+namespace IqFramework\Controllers;
+
+class AuthController {
+
+	public function showProfile($username)
+	{
+		return $username; // testuser
+	}
+}
+```
+
