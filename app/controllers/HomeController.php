@@ -8,10 +8,10 @@ use Validator;
 
 class HomeController {
 
-	public function home()
+	public function home($id)
 	{
 
-		return toJson($_SERVER);
+		return $id;
 		
 	}
 }
