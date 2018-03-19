@@ -48,3 +48,12 @@
  	{
  		return $_SERVER['REQUEST_URI'] === $uri ? $uri : $_SERVER['REQUEST_URI'];
  	}
+
+
+ 	function view($viewName, array $data)
+ 	{
+ 		global $template;
+ 		$path = $viewName . '.iqv.php';
+
+ 		return $template->render($path, $data);
+ 	}

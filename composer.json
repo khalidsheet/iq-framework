@@ -14,7 +14,9 @@
         "filp/whoops": "^2.1",
         "illuminate/database": "^5.6",
         "rakit/validation": "^0.14.0",
-        "bshaffer/oauth2-server-php": "^1.10"
+        "bshaffer/oauth2-server-php": "^1.10",
+        "twig/twig": "~2.0",
+        "guzzlehttp/guzzle": "^6.3"
     },
     "minimum-stability": "stable",
     "autoload": {

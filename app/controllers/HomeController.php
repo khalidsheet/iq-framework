@@ -8,10 +8,14 @@ use Validator;
 
 class HomeController {
 
-	public function home($id)
+	public function home()
 	{
-
-		return $id;
+		$pageTitle = 'Tests';
+		$names = [
+			'name' => ['khalid'],
+			'age' => ['ayat']
+		];
+		return view('index', compact('names', 'pageTitles'));
 		
 	}
 }
