@@ -9,5 +9,6 @@
 
 	autoload_classess('http');
 	setClassAlias($class_aliases);
+	autoload_classess('exceptions');
 	autoload_classess('controllers');
 	autoload_classess('models');

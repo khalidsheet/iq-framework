@@ -5,17 +5,25 @@ namespace IqFramework\Controllers;
 use App\Models\User;
 use Request;
 use Validator;
+use Session;
+use Cookie;
 
 class HomeController {
 
 	public function home()
 	{
-		$pageTitle = 'Tests';
-		$names = [
-			'name' => ['khalid'],
-			'age' => ['ayat']
-		];
-		return view('index', compact('names', 'pageTitles'));
-		
+		$session = new Session('test_');
+
+		return $session->get('name');
+
+		return toJson($session->all());
+
+	}
+
+	public function test()
+	{
+		$cookie = new Cookie;
+
+		return toJson($cookie->all());
 	}
 }
