@@ -8,9 +8,9 @@ class ComposerStaticInit4295c0c989ed807e01d5ae9f19fe855c
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
+        '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
     );
 
@@ -27,6 +27,7 @@ class ComposerStaticInit4295c0c989ed807e01d5ae9f19fe855c
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Component\\Translation\\' => 30,
+            'Symfony\\Component\\Console\\' => 26,
         ),
         'R' => 
         array (
@@ -84,6 +85,10 @@ class ComposerStaticInit4295c0c989ed807e01d5ae9f19fe855c
         'Symfony\\Component\\Translation\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/translation',
+        ),
+        'Symfony\\Component\\Console\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/console',
         ),
         'Rakit\\Validation\\' => 
         array (
@@ -161,13 +166,6 @@ class ComposerStaticInit4295c0c989ed807e01d5ae9f19fe855c
             'Twig_' => 
             array (
                 0 => __DIR__ . '/..' . '/twig/twig/lib',
-            ),
-        ),
-        'O' => 
-        array (
-            'OAuth2' => 
-            array (
-                0 => __DIR__ . '/..' . '/bshaffer/oauth2-server-php/src',
             ),
         ),
     );

@@ -12,12 +12,20 @@ class HomeController {
 
 	public function home()
 	{
-		$session = new Session('test_');
+		$str = explode(' ', 'k h a l i d');
+		$results = [];
 
-		return $session->get('name');
+		foreach($str as $char) {
+			$results[] = [
+				'char' => $char,
+				'hex'  => bin2hex($char)
+			];
+		}
 
-		return toJson($session->all());
-
+		return toJson([
+			'hex for khalid' => bin2hex('khalid'),
+			'each char' => $results
+		]);
 	}
 
 	public function test()

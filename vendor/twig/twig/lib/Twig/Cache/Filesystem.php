@@ -47,10 +47,6 @@ class Twig_Cache_Filesystem implements Twig_CacheInterface
 
     public function write($key, $content)
     {
-        mkdir($key, 0777, true) or die('ss');
-       // mkdir($key, 0777, true);
-        die;
-        
         $dir = dirname($key);
         if (!is_dir($dir)) {
             if (false === @mkdir($dir, 0777, true)) {

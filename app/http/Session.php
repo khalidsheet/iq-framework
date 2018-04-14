@@ -19,6 +19,11 @@ class Session
 		$this->_prefix = $prefix;
 	}
 
+	public function status()
+	{
+		return session_status();
+	}
+
 	public function id()
 	{
 		$this->session_id = session_id();

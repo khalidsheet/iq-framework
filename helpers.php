@@ -33,7 +33,9 @@
  	function toJson($data)
  	{
  		header('Content-type:application/json');
- 		return json_encode($data);
+ 		$json = json_encode($data);
+
+ 		return $json;
  	}
 
 
@@ -57,3 +59,23 @@
 
  		return $template->render($path, $data);
  	}
+
+
+ 	function registerCommands(Symfony\Component\Console\Application $application)
+ 	{
+
+ 		$path = 'App/Commands/*';
+ 		$commands = glob($path);
+ 	
+ 		foreach ($commands as $command) {
+ 			$command = end(explode('\\', str_replace('/', '\\', explode('.', $command)[0])));
+ 			$application->add(new $command);
+ 		}
+ 		
+ 		return $application;
+ 	}
+
+
+
+
+ 	

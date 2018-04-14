@@ -1,0 +1,51 @@
+<?php 
+
+namespace App\Commands;
+
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Style\SymfonyStyle;
+
+
+
+class CreateNewControllerCommand extends Command
+{
+    protected function configure()
+    {
+	    $this->setName('make:controller')
+	    	 ->addArgument('name', InputArgument::REQUIRED, 'The name of the controller.')
+	       	 ->setDescription('Creates a new controller.')
+	         ->setHelp('This command allows you to create a controller...');
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+    	$name = ucfirst($input->getArgument('name'));
+    	$dir  = "app/controllers/{$name}.php";
+		$io   = new SymfonyStyle($input, $output);
+
+		$io->title("Creating {$name} Controller....");
+
+		$controller = fopen($dir, "w") or die("Unable to open file!");
+		fwrite($controller, $this->ControllerFileContent($name));
+		fclose($controller);
+
+	    $io->success("Controller {$name} created successfully.");
+    }
+
+
+    private function ControllerFileContent($className)
+    {
+    	return "<?php 
+    	\n namespace IqFramework\Controllers;
+    	\n use Request;\n use Session;
+    	\n class {$className} {
+		\n\tpublic function home() {
+		\n\t\treturn 'Home Page';	
+		\n\t}
+    	\n }
+    	";
+    }
+}
