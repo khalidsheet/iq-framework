@@ -6,8 +6,9 @@
  **Because**
  - Easy to use 
  - MVC 
- - Less than **1MB** file size !
  - Easy Routing System
+ - Easy Mailing System
+ - Easy CLI to crate **Controller**, **Model**, **Route** and **Mail**
  - and Much more.
 ---
 
