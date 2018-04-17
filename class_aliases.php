@@ -6,7 +6,7 @@ $class_aliases = [
 	/*
 	 * This Place created for you to let you rename your own libraries
 	 * Or Packages to make it easer to use without using the namespaces
-	 * Write you {$key} and {$value}
+	 * Write your {$key} and {$value}
 	 * the $key is the new name of your package or your class
 	 * and the $value is the full path of your package
 	 */
@@ -17,13 +17,14 @@ $class_aliases = [
 	 * Framework built in Libraries
 	 */
 	
-	'Router' 	=> IqFramework\App\Http\Router::class,
-	'Database' 	=> IqFramework\App\Models\Database::class,
-	'Request' 	=> IqFramework\App\Http\Request::class,
-	'Validator' => Rakit\Validation\Validator::class,
-	'Session'   => IqFramework\App\Http\Session::class,
-	'Cookie'    => IqFramework\App\Http\Cookie::class,
-	'Carbon'    => Carbon\Carbon::class,
+	'Router' 		  => IqFramework\App\Http\Router::class,
+	'Database' 		  => IqFramework\App\Models\Database::class,
+	'Request' 		  => IqFramework\App\Http\Request::class,
+	'Validator' 	  => Rakit\Validation\Validator::class,
+	'Session'   	  => IqFramework\App\Http\Session::class,
+	'Cookie'    	  => IqFramework\App\Http\Cookie::class,
+	'Carbon'    	  => Carbon\Carbon::class,
+	'Mailer'		  => IqFramework\App\Mailer::class,
 
 
 	/*
@@ -43,21 +44,9 @@ $class_aliases = [
 	 * ....
 	 */
 	'CreateNewControllerCommand' => App\Commands\CreateNewControllerCommand::class,
-	'CreateRouteCommand' => App\Commands\CreateRouteCommand::class,
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	'CreateRouteCommand' 		 => App\Commands\CreateRouteCommand::class,
+	'CreateNewModelCommand'		 => App\Commands\CreateNewModelCommand::class,
+	'CreateNewMailCommand'		 => App\Commands\CreateNewMailCommand::class,
 
 
 

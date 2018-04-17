@@ -40,6 +40,7 @@ class ComposerStaticInit4295c0c989ed807e01d5ae9f19fe855c
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
             'Pecee\\' => 6,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
         'M' => 
         array (
@@ -113,6 +114,10 @@ class ComposerStaticInit4295c0c989ed807e01d5ae9f19fe855c
         'Pecee\\' => 
         array (
             0 => __DIR__ . '/..' . '/pecee/simple-router/src/Pecee',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'Models\\' => 
         array (

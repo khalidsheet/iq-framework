@@ -2,4 +2,4 @@
 
 
         
-Router::get("myFramework/", "HomeController@home");
+Router::get("/myFramework", "HomeController@home");

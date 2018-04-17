@@ -42,7 +42,7 @@ Route with Controller
 in `routes/web.php`
 ```php
 Router::post('login', 'AuthController@login');
-Router::get('user/{username}/profile', 'AuthController@showProfile'); // http://fake.com/login/testuser/profile
+Router::get('user/{username}/profile', 'AuthController@showProfile'); // http://fake.com/user/testuser/profile
 ```
 in `app/controllers/AuthController.php`
 ```php

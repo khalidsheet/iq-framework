@@ -8,7 +8,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\ArrayInput;
 
+
+use CreateNewControllerCommand;
 
 class CreateRouteCommand extends Command
 {
@@ -28,16 +31,30 @@ class CreateRouteCommand extends Command
         // define output/input to customize the console font 
         $io = new SymfonyStyle($input, $output);
 
+
         // get args & opts
         $url = $input->getArgument('url');
         $controller = ucfirst($input->getOption('controller'));
         $method = $input->getOption('method');
         $function = $input->getOption('function');
 
+
+        if (!$this->checkForClass($controller)) {
+            $command = $this->getApplication()->find('make:controller');
+
+            $arguments = array(
+                'command' => 'make:controller',
+                'name'    => $controller,
+            );
+
+            $CreateNewControllerCommand = new ArrayInput($arguments);
+            $command->run($CreateNewControllerCommand, $output);
+        }
+
         // set dir to write or append the content
     	$dir  = "routes/web.php";
 
-        // display new message in the CLI
+        // display a message in the CLI
 		$io->title("Creating your Route....");
         
         // Open the file to make changes
@@ -55,4 +72,19 @@ class CreateRouteCommand extends Command
     {
     	return "\nRouter::$method(\"{$url}\", \"{$controller}@{$function}\");";
     }
+
+    private function checkForClass($class_name)
+    {
+        $controllers = glob('app/controllers/*.php');
+        foreach ($controllers as $controller) {
+            $controller = end(explode('/', explode('.', $controller)[0]));
+            if ($class_name !== $controller) {
+                return false;
+            } else {
+                return true;
+            }          
+        }
+
+    }
+
 }

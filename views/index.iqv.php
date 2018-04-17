@@ -5,8 +5,6 @@
 	<title>{{ pageTitle }}</title>
 </head>
 <body>
-	{@ for name in names @}
-		{{ name[0] }}
-	{@ endfor @}
+	Hello World
 </body>
 </html>

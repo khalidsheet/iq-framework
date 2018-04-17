@@ -1,24 +1,34 @@
 <?php 
 
-
 namespace IqFramework\App\Http;
-
-use IqFramework\App\Http\Exceptions\SessionKeyOrValueEmptyException;
-use IqFramework\App\Http\Exceptions\SessionPrefixNotStringException;
 
 class Session
 {
-	public $_prefix;
-	public $session_id;
-	public $sessionKey;
+	protected $_prefix = null;
+	protected $sessionId;
+	protected $sessionKey;
+	protected $userEmail = [];
+	protected $sessionsFromPrefix = [];
+	protected $auth_prefix;
+	protected $authToken;
 	
-	public function __construct($prefix = 'session_')
+	public function __construct($sessionPrefix = null, $cacheExpire = 90, $cacheLimiter = 'public')
 	{
-		session_start();
+		// set the cache limiter.
+		// nocache, private, private_no_expire, or public.
+		session_cache_limiter($cacheLimiter);
+		// set the session cache expire
+		session_cache_expire($cacheExpire);
+		// start the session 
+		if(!isset($_SESSION))
+			session_start();
+		// store the session id
 		$this->id();
-		$this->_prefix = $prefix;
+		// store the session prefix 
+		$this->_prefix = $sessionPrefix != null ? $sessionPrefix : $this->getPrefix();
+		//$this->_prefix = is_null($sessionPrefix) ? $this->randomPrefix() : $sessionPrefix;
 	}
-
+	
 	public function status()
 	{
 		return session_status();
@@ -26,23 +36,32 @@ class Session
 
 	public function id()
 	{
-		$this->session_id = session_id();
-		return $this;
+		$this->sessionId = session_id();
+		return $this->sessionId;
 	}
 
 	public function regenerate_id()
 	{
-		 return session_regenerate_id();
+		session_regenerate_id();
+		$this->id();
+		 return session_id();
 	}
 
-	public function prefix($prefix = 'iq_framework_')
+	public function prefix($prefix = 'app_')
 	{
 		if (is_string($prefix)) {
 			$this->_prefix = $prefix;
 			return $this;
 		} else {
-			throw new SessionPrefixNotStringException("Prefix {$prefix} must be a String", 1);
+			throw new \Exception("Prefix {$prefix} must be a String", 1);
 		}
+	}
+
+	public function randomPrefix($length = 15)
+	{
+	    $randomPrefix = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_$'),0,$length);
+	    $this->_prefix = $randomPrefix . '_';
+	    return $this;
 	}
 
 	public function getPrefix()
@@ -57,9 +76,8 @@ class Session
 
 	public function set($key, $value = null) {
 		if (empty($key) && !isset($key)) {
-			throw new SessionKeyOrValueEmptyException("Key or Value cannot be empty", 1);
+			throw new \Exception("Key or Value cannot be empty", 1);
 		}
-
 		if (is_array($key)) {
 			foreach($key as $arrayIndex => $arrayValue) {
 				if (is_array($key[$arrayIndex])) {
@@ -71,17 +89,20 @@ class Session
 		} else {
 			$_SESSION[$this->_prefix.$key] = $value;
 		}
-
 		return $this;
 	}
 
-	public function get($key)
+	public function get($key, $prefix = null)
 	{
-		$this->sessionKey = $_SESSION[$this->_prefix.$key];
+		$prefix = !is_null($prefix) ? $prefix : $this->_prefix;
+		$this->sessionKey = $_SESSION[$prefix.$key];
 		return $this->sessionKey;
 	}
 
-
+	public static function has($key) {
+		$session = (new self);
+		return $session->search($key) != null ? true : false;
+	}
 
 	public function remove(...$key) 
 	{
@@ -94,6 +115,22 @@ class Session
 		}
 		
 		return $this;
+	}
+
+	public function fromPrefix($prefix)
+	{
+		foreach($this->all() as $key => $value)
+	    {
+	        if (strpos($key, $prefix) === 0)
+	        {
+	          	$this->sessionsFromPrefix[$key] = $value;
+	        }
+	    }
+	    return $this->sessionsFromPrefix;
+	}
+
+	protected function search($key) {
+		return $this->all()[$key];
 	}
 
 	public function destroy()
