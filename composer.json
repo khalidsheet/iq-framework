@@ -3,6 +3,7 @@
     "description": "A web framework",
     "type": "project",
     "license": "MIT",
+    "version": "1.0.0",
     "authors": [
         {
             "name": "Khalid M. Sheet",
