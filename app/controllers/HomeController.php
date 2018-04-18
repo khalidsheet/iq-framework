@@ -2,6 +2,8 @@
 
 namespace IqFramework\Controllers;
 
+use IqFramework\BaseController\Controller;
+
 use Request;
 
 
