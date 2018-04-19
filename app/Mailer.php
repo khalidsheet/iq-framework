@@ -22,7 +22,7 @@ class Mailer
 	
 	public function __construct()
 	{
-		self::$instance = new PHPMailer(true);
+		static::$instance = new PHPMailer();
 
 		// run mailer base settings
 		$this->setupMailerSettings();
@@ -31,15 +31,19 @@ class Mailer
 		$this->setupMailer();
 
 		// sender email
-		self::$instance->setFrom($this->senderEmail, $this->senderName);
+		if ($this->senderEmail != null || !empty($this->senderEmail)) {
+			self::$instance->setFrom($this->senderEmail, $this->senderName);
+		} else {
+			self::$instance->setFrom('test@email.com', 'Test Mailer');
+		}
 	}
 
 	protected static function instance() {
-		return self::$instance;
+		return static::$instance;
 	}
 
 	private function setupMailer() {
-		$instance = self::$instance;
+		$instance = static::$instance;
 
 	    $instance->SMTPDebug  = $this->mailSMTPDebug;                                
 	    $instance->isSMTP($this->isSMTP);                                      
@@ -67,9 +71,9 @@ class Mailer
 
 	public static function send(Mailer $mail)
 	{
-		$instance = self::$instance;
-		self::address($mail->to);
-		self::subject($mail->subject);
+		$instance = static::$instance;
+		static::address($mail->to);
+		static::subject($mail->subject);
 
 		if (method_exists($mail, 'setup')) {
 			$mail->setup();
@@ -80,13 +84,12 @@ class Mailer
 		}
         
 		$instance->send();
-
 	}
 
 
 	public static function address(array $emails)
 	{
-		$instance = self::$instance;
+		$instance = static::$instance;
 
 		if(is_array($emails)) {
 			foreach ($emails as $email) {
@@ -99,18 +102,18 @@ class Mailer
 
 	public static function subject(string $subject)
 	{
-		self::$instance->Subject = $subject;
+		static::$instance->Subject = $subject;
 	}
 
 	public function replyTo(array $emails)
 	{
 		if (is_array($emails)) {
 			foreach($emails as $email) {
-				self::$instance->addReplyTo($email);
+				static::$instance->addReplyTo($email);
 			}
 		}
 
-		return self::$instance;
+		return static::$instance;
 	}
 
 
@@ -119,22 +122,22 @@ class Mailer
 
 		if (is_array($emails)) {
 			foreach($emails as $email) {
-				self::$instance->addCC($email);
+				static::$instance->addCC($email);
 			}
 		}
 
-		return self::$instance;
+		return static::$instance;
 	}
 
 	public function bcc(array $emails)
 	{
 		if (is_array($emails)) {
 			foreach($emails as $email) {
-				self::$instance->addBCC($email);
+				static::$instance->addBCC($email);
 			}
 		}
 
-		return self::$instance;
+		return static::$instance;
 
 	}
 
@@ -143,19 +146,19 @@ class Mailer
 
 		if (is_array($attachments)) {
 			foreach($attachments as $attach) {
-				self::$instance->addAttachment($attach);
+				static::$instance->addAttachment($attach);
 			}
 		}
 
-		return self::$instance;
+		return static::$instance;
 	}
 
 	private function body($content, $isHtml = true)
 	{
-	    self::$instance->isHTML($isHtml);
-	    self::$instance->Body = $content;
+	    static::$instance->isHTML($isHtml);
+	    static::$instance->Body = $content;
 
-	    return self::$instance;
+	    return static::$instance;
 	}
 
 }

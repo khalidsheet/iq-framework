@@ -11,8 +11,6 @@ class TestMail extends Mailer
 	protected $subject = "New Test Mail";
 
 
-
-
 	public function setup()
 	{
 		$this->cc(['someEmail@mail.com']);
